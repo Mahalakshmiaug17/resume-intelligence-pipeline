@@ -3,7 +3,7 @@ import json
 from parsers.csv_parser import CSVParser
 from parsers.pdf_parser import PDFParser
 
-from services.normalizer import DataNormalizer
+from services.normaliser import DataNormaliser
 from services.merger import CandidateMerger
 from services.confidence import ConfidenceScorer
 from services.provenance import ProvenanceTracker
@@ -33,8 +33,8 @@ for candidate in csv_candidates:
     pdf_data = pdf_parser.parse()
 
     # Normalize data
-    csv_data = DataNormalizer(candidate).normalize()
-    pdf_data = DataNormalizer(pdf_data).normalize()
+    csv_data = DataNormaliser(candidate).normalise()
+    pdf_data = DataNormaliser(pdf_data).normalise()
 
     print("\n========== CSV Data ==========")
     print(json.dumps(csv_data, indent=4))
