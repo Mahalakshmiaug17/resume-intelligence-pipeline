@@ -15,13 +15,33 @@ class JSONGenerator:
 
         final_json = {}
 
+        # -------------------------
+        # Field Weights
+        # -------------------------
+        weights = {
+            "full_name": 0.25,
+            "email": 0.20,
+            "phone": 0.20,
+            "skills": 0.25,
+            "experience": 0.10
+        }
+
+        overall_confidence = 0
+
         for field in self.merged_data:
+
+            score = self.confidence.get(field, 0.0)
 
             final_json[field] = {
                 "value": self.merged_data[field],
-                "confidence": self.confidence.get(field, 0.0),
+                "confidence": score,
                 "source": self.provenance.get(field, "Unknown")
             }
+
+            overall_confidence += score * weights.get(field, 0)
+
+        # Add overall confidence
+        final_json["overall_confidence"] = round(overall_confidence, 2)
 
         return final_json
 
