@@ -1,9 +1,11 @@
 import re
+import math
+
 
 class DataNormaliser:
     """
-    Converts candidate data into a standard format.
-    Also handles missing values.
+    Normalises candidate data into a standard format.
+    Also converts missing values to None.
     """
 
     def __init__(self, data):
@@ -14,10 +16,18 @@ class DataNormaliser:
         normalised = self.data.copy()
 
         # ---------------------------------
-        # Convert Missing Values to None
+        # Handle Missing Values
         # ---------------------------------
         for key, value in normalised.items():
 
+            # Handle NaN values from pandas
+            if isinstance(value, float):
+
+                if math.isnan(value):
+                    normalised[key] = None
+                    continue
+
+            # Handle string values
             if isinstance(value, str):
 
                 value = value.strip()
@@ -31,42 +41,39 @@ class DataNormaliser:
                     "-"
                 ]:
                     normalised[key] = None
+
                 else:
                     normalised[key] = value
 
         # ---------------------------------
-        # Normalize Full Name
+        # Normalise Full Name
         # ---------------------------------
-        name = normalised.get("full_name")
+        if normalised.get("full_name"):
 
-        if name:
-            normalised["full_name"] = name.title()
+            normalised["full_name"] = normalised["full_name"].title()
 
         # ---------------------------------
-        # Normalize Email
+        # Normalise Email
         # ---------------------------------
-        email = normalised.get("email")
-
-        if email:
+        if normalised.get("email"):
 
             match = re.search(
                 r'[\w\.-]+@[\w\.-]+\.\w+',
-                email
+                normalised["email"]
             )
 
             if match:
                 normalised["email"] = match.group().lower()
 
         # ---------------------------------
-        # Normalize Phone
+        # Normalise Phone
         # ---------------------------------
-        phone = normalised.get("phone")
+        if normalised.get("phone"):
 
-        if phone:
-            normalised["phone"] = phone.strip()
+            normalised["phone"] = normalised["phone"].strip()
 
         # ---------------------------------
-        # Normalize Skills
+        # Normalise Skills
         # ---------------------------------
         skills = normalised.get("skills")
 
@@ -87,11 +94,17 @@ class DataNormaliser:
             ]
 
         # ---------------------------------
-        # Normalize Experience
+        # Normalise Experience
         # ---------------------------------
-        experience = normalised.get("experience")
+        if normalised.get("experience"):
 
-        if experience:
-            normalised["experience"] = experience.strip()
+            normalised["experience"] = normalised["experience"].strip()
+
+        # ---------------------------------
+        # Normalise Gender
+        # ---------------------------------
+        if normalised.get("gender"):
+
+            normalised["gender"] = normalised["gender"].title()
 
         return normalised
