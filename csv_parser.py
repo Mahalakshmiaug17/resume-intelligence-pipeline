@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 class CSVParser:
     """
     Parses candidate information from a recruiter CSV file.
@@ -10,25 +9,14 @@ class CSVParser:
         self.file_path = file_path
 
     def parse(self):
+
         try:
             df = pd.read_csv(self.file_path)
 
-            candidate = df.iloc[0].to_dict()
+            candidates = df.to_dict(orient="records")
 
-            # Clean email if stored as markdown/mailto
-            if "email" in candidate:
-                email = str(candidate["email"])
-
-                if "mailto:" in email:
-                    import re
-
-                    match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', email)
-
-                    if match:
-                        candidate["email"] = match.group()
-
-            return candidate
+            return candidates
 
         except Exception as e:
             print(f"Error reading CSV: {e}")
-            return {}
+            return []
