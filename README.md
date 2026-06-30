@@ -68,19 +68,27 @@ Run the full pipeline: python main.py
 ## Output
 
 ```text
+
 ========== Candidate Data Transformer ==========
+
+
+======================================
+Processing Candidate ID : 1
+======================================
 
 ========== CSV Data ==========
 {
+    "id": 1,
     "full_name": "Mahalakshmi S",
     "email": "maha@gmail.com",
     "phone": "+91 9876543210",
     "skills": [
-        "Python",
         "Java",
-        "SQL"
+        "Python",
+        "Sql"
     ],
-    "experience": "2 Years"
+    "experience": "2 Years",
+    "gender": "Female"
 }
 
 ========== Resume Data ==========
@@ -89,9 +97,9 @@ Run the full pipeline: python main.py
     "email": "maha@gmail.com",
     "phone": "+91 9876543210",
     "skills": [
-        "Python",
         "Java",
-        "SQL"
+        "Python",
+        "Sql"
     ],
     "experience": "2 Years"
 }
@@ -102,11 +110,13 @@ Run the full pipeline: python main.py
     "email": "maha@gmail.com",
     "phone": "+91 9876543210",
     "skills": [
-        "Python",
         "Java",
-        "SQL"
+        "Python",
+        "Sql"
     ],
-    "experience": "2 Years"
+    "experience": "2 Years",
+    "age": null,
+    "gender": "Female"
 }
 
 ========== Confidence Scores ==========
@@ -115,7 +125,9 @@ Run the full pipeline: python main.py
     "email": 1.0,
     "phone": 1.0,
     "skills": 1.0,
-    "experience": 1.0
+    "experience": 1.0,
+    "age": 0.6,
+    "gender": 0.8
 }
 
 ========== Provenance ==========
@@ -124,7 +136,9 @@ Run the full pipeline: python main.py
     "email": "Both",
     "phone": "Both",
     "skills": "Both",
-    "experience": "Both"
+    "experience": "Both",
+    "age": "Unknown",
+    "gender": "CSV"
 }
 
 ========== Final Standard JSON ==========
@@ -146,9 +160,9 @@ Run the full pipeline: python main.py
     },
     "skills": {
         "value": [
-            "Python",
             "Java",
-            "SQL"
+            "Python",
+            "Sql"
         ],
         "confidence": 1.0,
         "source": "Both"
@@ -157,11 +171,22 @@ Run the full pipeline: python main.py
         "value": "2 Years",
         "confidence": 1.0,
         "source": "Both"
-    }
+    },
+    "age": {
+        "value": null,
+        "confidence": 0.6,
+        "source": "Unknown"
+    },
+    "gender": {
+        "value": "Female",
+        "confidence": 0.8,
+        "source": "CSV"
+    },
+    "overall_confidence": 0.96
 }
-    Overall confidence : 0.94
 
-Final JSON saved to output/final_profile.json
+========== Overall Confidence ==========
+0.96
 
 ========== Validation Results ==========
 {
@@ -169,10 +194,10 @@ Final JSON saved to output/final_profile.json
     "email": "Valid",
     "phone": "Valid",
     "skills": "Valid",
-    "experience": "Valid"
+    "experience": "Valid",
+    "age": "Missing",
+    "gender": "Valid"
 }
-
-Project completed successfully!
 ```
 **Edge cases **
 
