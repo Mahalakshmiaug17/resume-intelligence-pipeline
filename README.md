@@ -29,6 +29,7 @@ candidate-data-transformer/
 │
 ├── output/
 │   └── candidate.json
+|   └── final_profile.json
 │
 ├── parsers/
 │   ├── csv_parser.py
@@ -39,6 +40,8 @@ candidate-data-transformer/
 │   ├── merger.py
 │   ├── confidence.py
 │   └── validator.py
+|   └── json_generator.py
+|   └── provenance.py
 │
 ├── models/
 │   └── candidate.py
