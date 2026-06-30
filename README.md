@@ -156,6 +156,7 @@ Run the full pipeline: python main.py
         "source": "Both"
     }
 }
+    Overall confidence : 0.94
 
 Final JSON saved to output/final_profile.json
 
