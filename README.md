@@ -4,23 +4,25 @@ Drive link for entire file :  https://drive.google.com/drive/folders/1vKk7d9JS8O
 **
 A modular Python-based data processing pipeline that extracts, normalises, merges and validates candidate information from both structured (CSV) and unstructured (Resume PDF) sources. The system intelligently resolves conflicts using confidence scoring, tracks data provenance and generates clean, standardised JSON output for downstream recruitment systems.
 
-**Features**
-📄 CSV Data Parsing (Structured Input)
-📑 Resume PDF Parsing (Unstructured Input)
-🔄 Intelligent Data Normalisation
-       ~ Email case normalisation
-       ~ Phone number standardisation
-       ~ Skills formatting
-🔗 Multi-source Candidate Profile Merging
-🔍 Duplicate Detection across CSV and Resume
-⚖️ Conflict Resolution using Confidence Scores
-📊 Field-level Confidence Scoring
-⭐ Overall Candidate Confidence Calculation
-🧾 Provenance Tracking (CSV / Resume / Both / Unknown)
-⚠️ Automatic Missing Value Handling (null)
-✅ Output Validation
-📦 Standardised JSON Generation
-👥 Multiple Candidate Processing Support 
+## Features
+
+- 📄 CSV Data Parsing (Structured Input)
+- 📑 Resume PDF Parsing (Unstructured Input)
+- 🔄 Intelligent Data Normalisation
+- 📧 Email Case Normalisation
+- 📱 Phone Number Standardisation
+- 🛠️ Skills Normalisation
+- 🔗 Multi-source Candidate Profile Merging
+- 🔍 Duplicate Detection
+- ⚖️ Conflict Resolution using Confidence Scores
+- 📊 Field-level Confidence Scoring
+- ⭐ Overall Candidate Confidence Calculation
+- 🧾 Provenance Tracking (CSV / Resume / Both / Unknown)
+- ⚠️ Automatic Missing Value Handling (`null`)
+- ✅ Output Validation
+- 📦 Standardised JSON Generation
+- 👥 Multiple Candidate Processing Support
+
 ## 📂 Project Structure
 
 ```text
