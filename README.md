@@ -71,7 +71,7 @@ Run the full pipeline: python main.py
 **Output**
 # Candidate Data Transformer
 
-## Output
+## Sample Output
 
 ```text
 
