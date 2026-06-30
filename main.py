@@ -4,109 +4,74 @@ from parsers.csv_parser import CSVParser
 from parsers.pdf_parser import PDFParser
 
 from services.normaliser import DataNormaliser
-from services.config_loader import ConfigLoader
 from services.merger import CandidateMerger
 from services.confidence import ConfidenceScorer
 from services.provenance import ProvenanceTracker
 from services.json_generator import JSONGenerator
 from services.validator import DataValidator
 
+print("\n========== Candidate Data Transformer ==========\n")
 
-def main():
+csv_parser = CSVParser("input/Recruiter.csv")
+csv_candidates = csv_parser.parse()
 
-    print("\n========== Candidate Data Transformer ==========\n")
+all_profiles = []
 
-    # -------------------------
-    # Load Config
-    # -------------------------
-    fields = ConfigLoader("config/config.json").load()
+for candidate in csv_candidates:
 
-    # -------------------------
-    # CSV
-    # -------------------------
-    csv_parser = CSVParser("input/Recruiter.csv")
-    csv_data = csv_parser.parse()
-    csv_data = DataNormaliser(csv_data).normalise()
+    print("\n======================================")
+    print(f"Processing Candidate ID : {candidate['id']}")
+    print("======================================")
 
-    csv_data = {
-        key: value
-        for key, value in csv_data.items()
-        if key in fields
-    }
+    resume_path = f"input/Resume_{candidate['id']}.pdf"
 
-    print("========== CSV Data ==========")
-    print(json.dumps(csv_data, indent=4))
+    pdf_parser = PDFParser(resume_path)
 
-    # -------------------------
-    # Resume
-    # -------------------------
-    pdf_parser = PDFParser("input/Resume.pdf")
     pdf_data = pdf_parser.parse()
+
+    csv_data = DataNormaliser(candidate).normalise()
     pdf_data = DataNormaliser(pdf_data).normalise()
 
-    pdf_data = {
-        key: value
-        for key, value in pdf_data.items()
-        if key in fields
-    }
+    print("\nCSV Data")
+    print(csv_data)
 
-    print("\n========== Resume Data ==========")
-    print(json.dumps(pdf_data, indent=4))
+    print("\nResume Data")
+    print(pdf_data)
 
-    # -------------------------
-    # Merge
-    # -------------------------
-    merger = CandidateMerger(csv_data, pdf_data)
-    merged_data = merger.merge()
+    merged = CandidateMerger(csv_data, pdf_data).merge()
 
-    print("\n========== Merged Candidate Profile ==========")
-    print(json.dumps(merged_data, indent=4))
+    print("\nMerged Profile")
+    print(merged)
 
-    # -------------------------
-    # Confidence
-    # -------------------------
-    confidence = ConfidenceScorer(csv_data, pdf_data)
-    confidence_scores = confidence.calculate()
+    confidence = ConfidenceScorer(csv_data, pdf_data).calculate()
 
-    print("\n========== Confidence Scores ==========")
-    print(json.dumps(confidence_scores, indent=4))
+    print("\nConfidence")
+    print(confidence)
 
-    # -------------------------
-    # Provenance
-    # -------------------------
-    provenance = ProvenanceTracker(csv_data, pdf_data)
-    provenance_data = provenance.track()
+    provenance = ProvenanceTracker(csv_data, pdf_data).track()
 
-    print("\n========== Provenance ==========")
-    print(json.dumps(provenance_data, indent=4))
+    print("\nProvenance")
+    print(provenance)
 
-    # -------------------------
-    # Final JSON
-    # -------------------------
-    generator = JSONGenerator(
-        merged_data,
-        confidence_scores,
-        provenance_data
-    )
-
-    final_json = generator.generate()
-
-    print("\n========== Final Standard JSON ==========")
-    print(json.dumps(final_json, indent=4))
-
-    generator.save("output/final_profile.json")
-
-    # -------------------------
-    # Validation
-    # -------------------------
-    validator = DataValidator(merged_data)
+    validator = DataValidator(merged)
     validation = validator.validate()
 
-    print("\n========== Validation Results ==========")
-    print(json.dumps(validation, indent=4))
+    print("\nValidation")
+    print(validation)
 
-    print("\nProject completed successfully!")
+    final_json = JSONGenerator(
+        merged,
+        confidence,
+        provenance
+    ).generate()
 
+    all_profiles.append(final_json)
 
-if __name__ == "__main__":
-    main()
+with open("output/final_profiles.json", "w") as file:
+
+    json.dump(all_profiles, file, indent=4)
+
+print("\n====================================")
+print("All Candidate Profiles Generated")
+print("Saved to output/final_profiles.json")
+print("====================================")
