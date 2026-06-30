@@ -3,75 +3,95 @@ import json
 from parsers.csv_parser import CSVParser
 from parsers.pdf_parser import PDFParser
 
-from services.normaliser import DataNormaliser
+from services.normalizer import DataNormalizer
 from services.merger import CandidateMerger
 from services.confidence import ConfidenceScorer
 from services.provenance import ProvenanceTracker
 from services.json_generator import JSONGenerator
 from services.validator import DataValidator
 
+
 print("\n========== Candidate Data Transformer ==========\n")
 
+# Read all candidates from CSV
 csv_parser = CSVParser("input/Recruiter.csv")
 csv_candidates = csv_parser.parse()
 
 all_profiles = []
 
+# Process each candidate
 for candidate in csv_candidates:
 
     print("\n======================================")
     print(f"Processing Candidate ID : {candidate['id']}")
     print("======================================")
 
+    # Read corresponding resume
     resume_path = f"input/Resume_{candidate['id']}.pdf"
 
     pdf_parser = PDFParser(resume_path)
-
     pdf_data = pdf_parser.parse()
 
-    csv_data = DataNormaliser(candidate).normalise()
-    pdf_data = DataNormaliser(pdf_data).normalise()
+    # Normalize data
+    csv_data = DataNormalizer(candidate).normalize()
+    pdf_data = DataNormalizer(pdf_data).normalize()
 
-    print("\nCSV Data")
-    print(csv_data)
+    print("\n========== CSV Data ==========")
+    print(json.dumps(csv_data, indent=4))
 
-    print("\nResume Data")
-    print(pdf_data)
+    print("\n========== Resume Data ==========")
+    print(json.dumps(pdf_data, indent=4))
 
-    merged = CandidateMerger(csv_data, pdf_data).merge()
+    # Merge
+    merger = CandidateMerger(csv_data, pdf_data)
+    merged = merger.merge()
 
-    print("\nMerged Profile")
-    print(merged)
+    print("\n========== Merged Candidate Profile ==========")
+    print(json.dumps(merged, indent=4))
 
+    # Confidence
     confidence = ConfidenceScorer(csv_data, pdf_data).calculate()
 
-    print("\nConfidence")
-    print(confidence)
+    print("\n========== Confidence Scores ==========")
+    print(json.dumps(confidence, indent=4))
 
+    # Provenance
     provenance = ProvenanceTracker(csv_data, pdf_data).track()
 
-    print("\nProvenance")
-    print(provenance)
+    print("\n========== Provenance ==========")
+    print(json.dumps(provenance, indent=4))
 
-    validator = DataValidator(merged)
-    validation = validator.validate()
-
-    print("\nValidation")
-    print(validation)
-
-    final_json = JSONGenerator(
+    # Generate Final JSON
+    generator = JSONGenerator(
         merged,
         confidence,
         provenance
-    ).generate()
+    )
 
+    final_json = generator.generate()
+
+    print("\n========== Final Standard JSON ==========")
+    print(json.dumps(final_json, indent=4))
+
+    # Print Overall Confidence
+    print("\n========== Overall Confidence ==========")
+    print(final_json["overall_confidence"])
+
+    # Validation
+    validator = DataValidator(merged)
+    validation = validator.validate()
+
+    print("\n========== Validation Results ==========")
+    print(json.dumps(validation, indent=4))
+
+    # Store profile
     all_profiles.append(final_json)
 
+# Save all profiles
 with open("output/final_profiles.json", "w") as file:
-
     json.dump(all_profiles, file, indent=4)
 
-print("\n====================================")
+print("\n========================================")
 print("All Candidate Profiles Generated")
 print("Saved to output/final_profiles.json")
-print("====================================")
+print("========================================")
