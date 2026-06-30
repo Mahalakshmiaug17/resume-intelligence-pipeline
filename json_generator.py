@@ -1,6 +1,5 @@
 import json
 
-
 class JSONGenerator:
     """
     Generates the final standardized JSON output.
@@ -19,18 +18,21 @@ class JSONGenerator:
         # Field Weights
         # -------------------------
         weights = {
-            "full_name": 0.25,
-            "email": 0.20,
-            "phone": 0.20,
-            "skills": 0.25,
-            "experience": 0.10
+            "full_name": 0.20,
+            "email": 0.15,
+            "phone": 0.15,
+            "skills": 0.20,
+            "experience": 0.15,
+            "gender": 0.10,
+            "age": 0.05
         }
 
-        overall_confidence = 0
+        total_weight = 0
+        weighted_score = 0
 
         for field in self.merged_data:
 
-            # Ignore CSV ID
+            # Ignore ID field
             if field == "id":
                 continue
 
@@ -42,9 +44,19 @@ class JSONGenerator:
                 "source": self.provenance.get(field, "Unknown")
             }
 
-            overall_confidence += score * weights.get(field, 0)
+            # Calculate weighted confidence
+            weight = weights.get(field, 0)
 
-        final_json["overall_confidence"] = round(overall_confidence, 2)
+            weighted_score += score * weight
+            total_weight += weight
+
+        # Overall Confidence
+        if total_weight > 0:
+            overall = round(weighted_score / total_weight, 2)
+        else:
+            overall = 0.0
+
+        final_json["overall_confidence"] = overall
 
         return final_json
 
