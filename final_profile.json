@@ -1,0 +1,31 @@
+{
+    "full_name": {
+        "value": "Mahalakshmi S",
+        "confidence": 1.0,
+        "source": "Both"
+    },
+    "email": {
+        "value": "maha@gmail.com",
+        "confidence": 1.0,
+        "source": "Both"
+    },
+    "phone": {
+        "value": "+91 9876543210",
+        "confidence": 1.0,
+        "source": "Both"
+    },
+    "skills": {
+        "value": [
+            "Python",
+            "Java",
+            "SQL"
+        ],
+        "confidence": 1.0,
+        "source": "Both"
+    },
+    "experience": {
+        "value": "2 Years",
+        "confidence": 1.0,
+        "source": "Both"
+    }
+}
