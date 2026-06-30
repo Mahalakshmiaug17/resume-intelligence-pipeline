@@ -1,0 +1,7 @@
+__pycache__/
+venv/
+env/
+node_modules/
+*.pyc
+output/*.log
+output/*.json  # (optional if too big)
