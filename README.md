@@ -17,14 +17,14 @@ It resolves conflicts using confidence scoring, maintains provenance tracking, a
 - 📦 Clean JSON output generation
 
  **Project Structure**
- candidate-data-transformer/
+```text
+candidate-data-transformer/
 │
 ├── input/
 │   ├── recruiter.csv
 │   ├── resume.pdf
-│
-├── config/
-│   └── config.json
+│   └── config/
+│       └── config.json
 │
 ├── output/
 │   └── candidate.json
@@ -45,7 +45,7 @@ It resolves conflicts using confidence scoring, maintains provenance tracking, a
 ├── main.py
 ├── requirements.txt
 └── README.md
-
+```
 **Installation**
 1. Clone the repository
 2. Install dependencies - pip install -r requirements.txt
