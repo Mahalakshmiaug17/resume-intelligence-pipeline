@@ -58,8 +58,13 @@ Run the full pipeline: python main.py
 2. Resume Input(Resume.pdf)
 
 **Output**
-**
+# Candidate Data Transformer
+
+## Output
+
+```text
 ========== Candidate Data Transformer ==========
+
 ========== CSV Data ==========
 {
     "full_name": "Mahalakshmi S",
@@ -72,6 +77,7 @@ Run the full pipeline: python main.py
     ],
     "experience": "2 Years"
 }
+
 ========== Resume Data ==========
 {
     "full_name": "Mahalakshmi S",
@@ -84,6 +90,7 @@ Run the full pipeline: python main.py
     ],
     "experience": "2 Years"
 }
+
 ========== Merged Candidate Profile ==========
 {
     "full_name": "Mahalakshmi S",
@@ -105,6 +112,7 @@ Run the full pipeline: python main.py
     "skills": 1.0,
     "experience": 1.0
 }
+
 ========== Provenance ==========
 {
     "full_name": "Both",
@@ -113,6 +121,7 @@ Run the full pipeline: python main.py
     "skills": "Both",
     "experience": "Both"
 }
+
 ========== Final Standard JSON ==========
 {
     "full_name": {
@@ -132,8 +141,8 @@ Run the full pipeline: python main.py
     },
     "skills": {
         "value": [
-        "Python",
-        "Java",
+            "Python",
+            "Java",
             "SQL"
         ],
         "confidence": 1.0,
@@ -145,6 +154,7 @@ Run the full pipeline: python main.py
         "source": "Both"
     }
 }
+
 Final JSON saved to output/final_profile.json
 
 ========== Validation Results ==========
@@ -155,9 +165,9 @@ Final JSON saved to output/final_profile.json
     "skills": "Valid",
     "experience": "Valid"
 }
-Project completed successfully!
-**
 
+Project completed successfully!
+```
 **Edge cases **
 
 1.Missing email in one source
