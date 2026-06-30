@@ -64,12 +64,15 @@ candidate-data-transformer/
 **How to Run**
 Run the full pipeline: python main.py
 
-**Input Sources**
-1.Recruiter.csv
-2.Resume_1.pdf
-3.Resume_2.pdf
-4.Resume_3.pdf
+## Input
+The pipeline accepts the following input files:
 
+- 📄 `Recruiter.csv` – Structured candidate information from recruiters.
+- 📑 `Resume_1.pdf` – Resume of Candidate 1.
+- 📑 `Resume_2.pdf` – Resume of Candidate 2.
+- 📑 `Resume_3.pdf` – Resume of Candidate 3.
+- ⚙️ `profile_schema.json` – Defines the standard output schema.
+  
 **Output**
 # Candidate Data Transformer
 
