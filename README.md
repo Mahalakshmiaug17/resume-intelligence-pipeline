@@ -15,8 +15,9 @@ It resolves conflicts using confidence scoring, maintains provenance tracking, a
 - 🧾 Provenance tracking (source transparency)
 - ✅ Output validation before final result
 - 📦 Clean JSON output generation
+- 
+## 📂 Project Structure
 
- **Project Structure**
 ```text
 candidate-data-transformer/
 │
@@ -46,6 +47,7 @@ candidate-data-transformer/
 ├── requirements.txt
 └── README.md
 ```
+
 **Installation**
 1. Clone the repository
 2. Install dependencies - pip install -r requirements.txt
