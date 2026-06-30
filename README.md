@@ -1,50 +1,54 @@
 Drive link for entire file :  https://drive.google.com/drive/folders/1vKk7d9JS8OpkGF4oRURvmokcfDinwELB?usp=sharing 
 
-**Candidate Data Transformer (Resume + CSV Intelligence Pipeline)
+**Candidate Data Transformer - Intelligent Resume & CSV Processing Pipeline
 **
-A modular data processing system that extracts, normalizes, merges, and validates structured candidate information from both structured (CSV) and unstructured (resume text) sources.
-It resolves conflicts using confidence scoring, maintains provenance tracking, and outputs clean validated JSON.
+A modular Python-based data processing pipeline that extracts, normalises, merges and validates candidate information from both structured (CSV) and unstructured (Resume PDF) sources. The system intelligently resolves conflicts using confidence scoring, tracks data provenance and generates clean, standardised JSON output for downstream recruitment systems.
 
 **Features**
-- 📄 CSV Data Parsing (structured input)
-- 📑 Resume Text Parsing (unstructured input)
-- 🔄 Data Normalization (email, phone, skills)
-- 🔗 Multi-source Merge Engine
-- ⚖️ Conflict Resolution using confidence scoring
-- 📊 Confidence Score assignment per field
-- 🧾 Provenance tracking (source transparency)
-- ✅ Output validation before final result
-- 📦 Clean JSON output generation
-- 
+📄 CSV Data Parsing (Structured Input)
+📑 Resume PDF Parsing (Unstructured Input)
+🔄 Intelligent Data Normalisation
+       ~ Email case normalisation
+       ~ Phone number standardisation
+       ~ Skills formatting
+🔗 Multi-source Candidate Profile Merging
+🔍 Duplicate Detection across CSV and Resume
+⚖️ Conflict Resolution using Confidence Scores
+📊 Field-level Confidence Scoring
+⭐ Overall Candidate Confidence Calculation
+🧾 Provenance Tracking (CSV / Resume / Both / Unknown)
+⚠️ Automatic Missing Value Handling (null)
+✅ Output Validation
+📦 Standardised JSON Generation
+👥 Multiple Candidate Processing Support 
 ## 📂 Project Structure
 
 ```text
 candidate-data-transformer/
-│
+
 ├── input/
-│   ├── recruiter.csv
-│   ├── resume.pdf
-│   └── config/
-│       └── config.json
+│   ├── Recruiter.csv
+│   ├── Resume_1.pdf
+│   ├── Resume_2.pdf
+│   ├── Resume_3.pdf
 │
 ├── output/
-│   └── candidate.json
-|   └── final_profile.json
+│   └── final_profiles.json
 │
 ├── parsers/
 │   ├── csv_parser.py
 │   └── pdf_parser.py
 │
 ├── services/
-│   ├── normalizer.py
+│   ├── normaliser.py
 │   ├── merger.py
 │   ├── confidence.py
-│   └── validator.py
-|   └── json_generator.py
-|   └── provenance.py
+│   ├── provenance.py
+│   ├── validator.py
+│   └── json_generator.py
 │
-├── models/
-│   └── candidate.py
+├── schema/
+│   └── profile_schema.json
 │
 ├── main.py
 ├── requirements.txt
@@ -59,8 +63,10 @@ candidate-data-transformer/
 Run the full pipeline: python main.py
 
 **Input Sources**
-1. CSV Input (recruiter.csv)
-2. Resume Input(Resume.pdf)
+1.Recruiter.csv
+2.Resume_1.pdf
+3.Resume_2.pdf
+4.Resume_3.pdf
 
 **Output**
 # Candidate Data Transformer
@@ -199,15 +205,24 @@ Processing Candidate ID : 1
     "gender": "Valid"
 }
 ```
-**Edge cases **
+### Edge Cases Handled
 
-1.Missing email in one source
-2.Multiple phone numbers
-3.Different spellings of candidate name
-4.Duplicate skills
-5.Conflicting work experience
-6.Empty fields
-7.Invalid phone/email formats
+1. Missing fields → `null`
+2. Duplicate data across sources
+3. Email case differences
+4. Phone numbers with/without country code
+5. Duplicate skills removal
+6. Empty or invalid values
+7. Conflict resolution using confidence scores
+8. Multiple candidate support
+
+**Intelligent Normalisation**
+
+The pipeline automatically standardises data before comparison:
+~ Converts email addresses to lowercase to avoid false mismatches.
+~ Standardises phone numbers (e.g., 9876543210 → +91 9876543210).
+~ Removes duplicate skills.
+~ Trims extra spaces and handles inconsistent formatting.
 
 **How to Use in Real Systems**
 
@@ -218,9 +233,15 @@ Candidate matching engines
 Data cleaning pipelines
 
 **Status**
-✔ Parsing implemented
-✔ Normalization implemented
-✔ Merge + conflict resolution implemented
-✔ Confidence scoring implemented
-✔ Validation added
-✔ CLI execution ready
+✔ CSV Parser
+✔ Resume PDF Parser
+✔ Data Normalisation
+✔ Candidate Merge Engine
+✔ Duplicate Detection
+✔ Confidence Scoring
+✔ Overall Confidence Calculation
+✔ Provenance Tracking
+✔ Missing Value Handling
+✔ Output Validation
+✔ JSON Generation
+✔ Multiple Candidate Support
