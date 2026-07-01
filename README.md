@@ -1,5 +1,3 @@
-**Drive link for entire file**  :  https://drive.google.com/drive/folders/1nUeDqcaE5J2Ya_qGO1gXKqYN5jfVvpBC?usp=sharing
-
 **Demo video link**  : https://drive.google.com/file/d/1SDat-n_r1c-5aBywHH52ER51jqXs-g93/view?usp=drivesdk
 
 ## Candidate Data Transformer - Intelligent Resume & CSV Processing Pipeline
