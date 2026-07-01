@@ -1,14 +1,14 @@
 import json
 
-from parsers.csv_parser import CSVParser
-from parsers.pdf_parser import PDFParser
+from csv_parser import CSVParser
+from pdf_parser import PDFParser
 
-from services.normaliser import DataNormaliser
-from services.merger import CandidateMerger
-from services.confidence import ConfidenceScorer
-from services.provenance import ProvenanceTracker
-from services.json_generator import JSONGenerator
-from services.validator import DataValidator
+from normaliser import DataNormaliser
+from merger import CandidateMerger
+from confidence import ConfidenceScorer
+from provenance import ProvenanceTracker
+from json_generator import JSONGenerator
+from validator import DataValidator
 
 
 print("\n========== Candidate Data Transformer ==========\n")
