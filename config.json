@@ -1,9 +1,0 @@
-{
-    "fields": [
-        "full_name",
-        "email",
-        "phone",
-        "skills",
-        "experience"
-    ]
-}
