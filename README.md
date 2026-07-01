@@ -63,7 +63,8 @@ candidate-data-transformer/
 1. Clone the repository
 2. Install dependencies - pip install -r requirements.txt
 
-**How to Run**
+## How to Run
+
  Run the full pipeline:
  ``` python main.py ```
 
