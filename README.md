@@ -62,7 +62,8 @@ candidate-data-transformer/
 2. Install dependencies - pip install -r requirements.txt
 
 **How to Run**
-Run the full pipeline: python main.py
+ Run the full pipeline:
+ ``` python main.py ```
 
 ## Input
 The pipeline accepts the following input files:
