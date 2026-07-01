@@ -25,7 +25,7 @@ for candidate in csv_candidates:
     print("======================================")
 
     # Read resume
-    resume_path = "Resume.pdf"
+    resume_path = f"Resume_{candidate['id']}.pdf"
 
     pdf_parser = PDFParser(resume_path)
     pdf_data = pdf_parser.parse()
