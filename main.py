@@ -10,11 +10,9 @@ from provenance import ProvenanceTracker
 from json_generator import JSONGenerator
 from validator import DataValidator
 
-
 print("\n========== Candidate Data Transformer ==========\n")
 
-# Read all candidates from CSV
-csv_parser = CSVParser("input/Recruiter.csv")
+csv_parser = CSVParser("Recruiter.csv")
 csv_candidates = csv_parser.parse()
 
 all_profiles = []
@@ -26,8 +24,8 @@ for candidate in csv_candidates:
     print(f"Processing Candidate ID : {candidate['id']}")
     print("======================================")
 
-    # Read corresponding resume
-    resume_path = f"input/Resume_{candidate['id']}.pdf"
+    # Read resume
+    resume_path = "Resume.pdf"
 
     pdf_parser = PDFParser(resume_path)
     pdf_data = pdf_parser.parse()
@@ -73,7 +71,6 @@ for candidate in csv_candidates:
     print("\n========== Final Standard JSON ==========")
     print(json.dumps(final_json, indent=4))
 
-    # Print Overall Confidence
     print("\n========== Overall Confidence ==========")
     print(final_json["overall_confidence"])
 
@@ -88,10 +85,10 @@ for candidate in csv_candidates:
     all_profiles.append(final_json)
 
 # Save all profiles
-with open("output/final_profiles.json", "w") as file:
+with open("final_profiles.json", "w") as file:
     json.dump(all_profiles, file, indent=4)
 
 print("\n========================================")
 print("All Candidate Profiles Generated")
-print("Saved to output/final_profiles.json")
+print("Saved to final_profiles.json")
 print("========================================")
