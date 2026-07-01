@@ -1,9 +1,9 @@
-Drive link for entire file :  https://drive.google.com/drive/folders/1nUeDqcaE5J2Ya_qGO1gXKqYN5jfVvpBC?usp=sharing
+**Drive link for entire file**  :  https://drive.google.com/drive/folders/1nUeDqcaE5J2Ya_qGO1gXKqYN5jfVvpBC?usp=sharing
 
-Demo video link : https://drive.google.com/file/d/1SDat-n_r1c-5aBywHH52ER51jqXs-g93/view?usp=drivesdk
+**Demo video link**  : https://drive.google.com/file/d/1SDat-n_r1c-5aBywHH52ER51jqXs-g93/view?usp=drivesdk
 
-**Candidate Data Transformer - Intelligent Resume & CSV Processing Pipeline
-**
+## Candidate Data Transformer - Intelligent Resume & CSV Processing Pipeline
+
 A modular Python-based data processing pipeline that extracts, normalises, merges and validates candidate information from both structured (CSV) and unstructured (Resume PDF) sources. The system intelligently resolves conflicts using confidence scoring, tracks data provenance and generates clean, standardised JSON output for downstream recruitment systems.
 
 ## Features
@@ -77,15 +77,14 @@ The pipeline accepts the following input files:
 - 📑 `Resume_3.pdf` – Resume of Candidate 3.
 - ⚙️ `profile_schema.json` – Defines the standard output schema.
   
-**Output**
-# Candidate Data Transformer
+## Output
 
+**Candidate Data Transformer**
 ## Sample Output
 
 ```text
 
 ========== Candidate Data Transformer ==========
-
 
 ======================================
 Processing Candidate ID : 1
@@ -214,7 +213,7 @@ Processing Candidate ID : 1
     "gender": "Valid"
 }
 ```
-### Edge Cases Handled
+## Edge Cases Handled
 
 1. Missing fields → `null`
 2. Duplicate data across sources
@@ -225,7 +224,7 @@ Processing Candidate ID : 1
 7. Conflict resolution using confidence scores
 8. Multiple candidate support
 
-**Intelligent Normalisation**
+## Intelligent Normalisation
 
 The pipeline automatically standardises data before comparison:
 ~ Converts email addresses to lowercase to avoid false mismatches.
@@ -233,7 +232,7 @@ The pipeline automatically standardises data before comparison:
 ~ Removes duplicate skills.
 ~ Trims extra spaces and handles inconsistent formatting.
 
-**How to Use in Real Systems**
+## How to Use in Real Systems
 
 This pipeline can be extended for:
 HR onboarding systems
@@ -241,7 +240,7 @@ Resume ranking tools
 Candidate matching engines
 Data cleaning pipelines
 
-**Status**
+## Status
 ✔ CSV Parser
 ✔ Resume PDF Parser
 ✔ Data Normalisation
